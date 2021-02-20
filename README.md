@@ -7,6 +7,21 @@ Try running the following commands:
 - dbt test
 
 
+### CICD slim TODO
+
+i want to only run models & tests that have changed. 
+run on each pull request
+
+- linting sql fluff
+- fetch manifest.json at start of each run
+- clone prod models into CI DB CAN REMOVE with --defer
+- seed, run, test
+    - seed --select state:modified --state prod_target_dir --full-refresh --target snowflake_dev
+    - dbt run --models state:modified --defer --state prod_target_dir --target snowflake_dev
+    - dbt test --models state:modified --defer --state prod_target_dir --target snowflake_dev
+- use --defer or zero copy clone?
+- save state (artifcats at the end of each run)
+
 ### Resources:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
 - Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers

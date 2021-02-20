@@ -1,0 +1,103 @@
+/**
+    This script creates the top-level objects for the
+    Jaffle Shop initiative in Snowflake. It also
+    creates corresponding object access roles to assign to 
+    business function roles as needed.
+**/
+//=============================================================================
+// create databases
+//=============================================================================
+USE ROLE SYSADMIN;
+
+// Databases
+CREATE DATABASE DBT_FUNDAMENTALS_DEV;     // local dbt targets this db from developer machines
+CREATE DATABASE DBT_FUNDAMENTALS_TEST;    // CI from pull requests happens here
+CREATE DATABASE DBT_FUNDAMENTALS_PROD;    // CI from merges to master happens here 
+
+
+//=============================================================================
+
+
+//=============================================================================
+// create warehouses
+//=============================================================================
+USE ROLE SYSADMIN;
+
+// dev warehouse
+CREATE WAREHOUSE
+    DBT_FUNDAMENTALS_DEV_WH
+    COMMENT='Warehouse for powering developer activities for the cloud cost monitoring project'
+    WAREHOUSE_SIZE=XSMALL
+    AUTO_SUSPEND=60
+    INITIALLY_SUSPENDED=TRUE;
+//=============================================================================
+
+
+//=============================================================================
+// create object access roles for databases
+//=============================================================================
+USE ROLE SECURITYADMIN;
+
+// dev roles
+CREATE ROLE DBT_FUNDAMENTALS_DEV_READ_WRITE;
+
+// test roles
+CREATE ROLE DBT_FUNDAMENTALS_TEST_READ_WRITE;
+
+// prod roles
+CREATE ROLE DBT_FUNDAMENTALS_PROD_READ_WRITE;
+
+// grant all roles to sysadmin (always do this)
+GRANT ROLE DBT_FUNDAMENTALS_DEV_READ_WRITE      TO ROLE SYSADMIN;
+GRANT ROLE DBT_FUNDAMENTALS_TEST_READ_WRITE     TO ROLE SYSADMIN;
+GRANT ROLE DBT_FUNDAMENTALS_PROD_READ_WRITE     TO ROLE SYSADMIN;
+//=============================================================================
+
+
+//=============================================================================
+// create object access roles for warehouses
+//=============================================================================
+USE ROLE SECURITYADMIN;
+
+// dev roles
+CREATE ROLE DBT_FUNDAMENTALS_DEV_WH_ALL;
+
+// grant all roles to sysadmin (always do this)
+GRANT ROLE DBT_FUNDAMENTALS_DEV_WH_ALL TO ROLE SYSADMIN;
+//=============================================================================
+ 
+
+//=============================================================================
+// grant privileges to object access roles
+//=============================================================================
+USE ROLE SECURITYADMIN;
+
+// dev permissions
+GRANT CREATE SCHEMA, USAGE ON DATABASE DBT_FUNDAMENTALS_DEV TO ROLE DBT_FUNDAMENTALS_DEV_READ_WRITE;
+GRANT ALL PRIVILEGES ON WAREHOUSE DBT_FUNDAMENTALS_DEV_WH   TO ROLE DBT_FUNDAMENTALS_DEV_WH_ALL;
+
+// test permissions
+GRANT CREATE SCHEMA, USAGE ON DATABASE DBT_FUNDAMENTALS_TEST TO ROLE DBT_FUNDAMENTALS_TEST_READ_WRITE;
+
+// prod permissions
+GRANT CREATE SCHEMA, USAGE ON DATABASE DBT_FUNDAMENTALS_PROD TO ROLE DBT_FUNDAMENTALS_PROD_READ_WRITE;
+
+//=============================================================================
+
+
+//=============================================================================
+// create business function roles and grant access to object access roles
+//=============================================================================
+USE ROLE SECURITYADMIN;
+ 
+// transformer roles
+CREATE ROLE DBT_FUNDAMENTALS_DEV_TRANSFORMER;
+ 
+// grant all roles to sysadmin (always do this)
+GRANT ROLE DBT_FUNDAMENTALS_DEV_TRANSFORMER  TO ROLE SYSADMIN;
+
+// dev OA roles
+GRANT ROLE DBT_FUNDAMENTALS_DEV_READ_WRITE TO ROLE DBT_FUNDAMENTALS_DEV_TRANSFORMER;
+GRANT ROLE DBT_FUNDAMENTALS_DEV_WH_ALL     TO ROLE DBT_FUNDAMENTALS_DEV_TRANSFORMER;
+GRANT ROLE FIVETRAN_READ_ROLE                   TO ROLE DBT_FUNDAMENTALS_DEV_TRANSFORMER;
+//=============================================================================
