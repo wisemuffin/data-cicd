@@ -1,4 +1,5 @@
-Welcome to your new dbt project!
+![](https://github.com/wisemuffin/dbt-snowflake-cost-monitoring/workflows/Scheduled%20production%20run/badge.svg)
+![](https://github.com/wisemuffin/dbt-snowflake-cost-monitoring/workflows/Production%20deployment%20from%20main/badge.svg)
 
 ### Using the starter project
 
@@ -16,7 +17,7 @@ run on each pull request
 - fetch manifest.json at start of each run
 - clone prod models into CI DB CAN REMOVE with --defer
 - seed, run, test
-    - seed --select state:modified --state prod_target_dir --full-refresh --target snowflake_dev
+    - dbt seed --select state:modified --state prod_target_dir --full-refresh --target snowflake_dev
     - dbt run --models state:modified --defer --state prod_target_dir --target snowflake_dev
     - dbt test --models state:modified --defer --state prod_target_dir --target snowflake_dev
 - use --defer or zero copy clone?

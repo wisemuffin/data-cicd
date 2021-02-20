@@ -32,6 +32,7 @@ jobs:
     - name: Deploy
       run: |
         export DBT_PROFILE_SCHEMA=pr_$(date +%s)
+        dbt seed --profiles-dir ./ci_profiles
         dbt run --profiles-dir ./ci_profiles
         dbt test --profiles-dir ./ci_profiles
     
