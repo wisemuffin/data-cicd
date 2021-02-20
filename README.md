@@ -1,5 +1,5 @@
-![](https://github.com/wisemuffin/dbt-snowflake-cost-monitoring/workflows/Scheduled%20production%20run/badge.svg)
-![](https://github.com/wisemuffin/dbt-snowflake-cost-monitoring/workflows/Production%20deployment%20from%20main/badge.svg)
+![](https://github.com/wisemuffin/dbt-tutorial-sf/workflows/Scheduled%20production%20run/badge.svg)
+![](https://github.com/wisemuffin/dbt-tutorial-sf/workflows/Production%20deployment%20from%20main/badge.svg)
 
 ### Using the starter project
 
