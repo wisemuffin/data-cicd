@@ -48,9 +48,9 @@ jobs:
 
     - name: Deploy
       run: |
-        dbt seed --select state:modified --full-refresh --profiles-dir ./ci_profiles
-        dbt run --models state:modified --profiles-dir ./ci_profiles
-        dbt test --models state:modified --profiles-dir ./ci_profiles
+        dbt seed --full-refresh --profiles-dir ./ci_profiles
+        dbt run --profiles-dir ./ci_profiles
+        dbt test --profiles-dir ./ci_profiles
 
     - name: Upload manifest.json from s3
       run: |
