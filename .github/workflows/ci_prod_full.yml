@@ -1,6 +1,6 @@
 name: Full Production deployment from main
 
-on: repository_dispatch
+on: workflow_dispatch
 
 
 env:
