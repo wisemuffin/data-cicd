@@ -52,6 +52,7 @@ jobs:
 
     - name: Deploy
       run: |
+        export DBT_PROFILE_SCHEMA=pr_$(date +%s)
         dbt seed --select state:modified --state ./target/last_manifest/manifest.json --full-refresh --profiles-dir ./ci_profiles
         dbt run --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
         dbt test --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
