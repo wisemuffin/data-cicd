@@ -1,8 +1,8 @@
-name: Check Data Freshness of production
+name: Test Data Freshness of Production
 
 on:
   schedule:
-    - cron:  '*/1 * * * *' # Run every day
+    - cron:  '0 1 * * *' # Run every day at 1am
   workflow_dispatch:
 
 
