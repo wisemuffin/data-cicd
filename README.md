@@ -1,31 +1,35 @@
 ![](https://github.com/wisemuffin/dbt-tutorial-sf/workflows/Scheduled%20production%20run/badge.svg)
 ![](https://github.com/wisemuffin/dbt-tutorial-sf/workflows/Production%20deployment%20from%20main/badge.svg)
 
-### Using the starter project
-
-Try running the following commands:
-- dbt run
-- dbt test
+# Testing out DBT
 
 
-### CICD slim TODO
 
-i want to only run models & tests that have changed. 
-run on each pull request
+# 'slim' CICD
+
+## Goals
+i want to only run models & tests for models, seeds, and tests that have changed. 
+
+Run on each pull request, and create separate schemas for each pull request.
+
+## Steps
 
 - linting sql fluff
 - fetch manifest.json at start of each run
 - clone prod models into CI DB CAN REMOVE with --defer
 - seed, run, test
-    - dbt seed --select state:modified --state prod_target_dir --full-refresh --target snowflake_dev
-    - dbt run --models state:modified --defer --state prod_target_dir --target snowflake_dev
-    - dbt test --models state:modified --defer --state prod_target_dir --target snowflake_dev
 - use --defer or zero copy clone?
-- save state (artifcats at the end of each run)
+- save state (artefact at the end of each run)
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+```bash
+aws s3 cp s3://dbt-tutorial-sf/prod/manifest/manifest.json ./target/last_manifest/manifest.json
+
+dbt seed --select state:modified --state ./target/last_manifest --full-refresh
+dbt run --models state:modified --defer --state ./target/last_manifest
+dbt test --models state:modified --defer --state ./target/last_manifest
+```
+
+localy test out storing manifest.json in aws s3
+```bash
+
+```
