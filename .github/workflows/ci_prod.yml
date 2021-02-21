@@ -56,9 +56,9 @@ jobs:
 
     - name: Deploy
       run: |
-        dbt seed --select state:modified --state ./target/last_manifest/manifest.json --full-refresh
-        dbt run --models state:modified --defer --state ./target/last_manifest
-        dbt test --models state:modified --defer --state ./target/last_manifest
+        dbt seed --select state:modified --state ./target/last_manifest/manifest.json --full-refresh --profiles-dir ./ci_profiles
+        dbt run --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
+        dbt test --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
     
     - name: Load the created manifest.json into s3
       run: |
