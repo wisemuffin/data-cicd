@@ -18,7 +18,8 @@ customer_orders as (
         max(order_date) as most_recent_order_date,
         count(order_id) as number_of_orders,
         sum(amount) as lifetime_value,
-        1 as dave
+        1 as dave,
+        1 as dave2
 
     from orders
 
