@@ -1,4 +1,7 @@
-name: Production deployment from main
+name: Full Production deployment from main
+
+on: repository_dispatch
+
 
 env:
   DBT_PROFILE_TARGET:            prod
