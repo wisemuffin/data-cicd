@@ -47,8 +47,7 @@ jobs:
 
     - name: Deploy
       run: |
-        dbt test --profiles-dir ./ci_profiles
-
+        dbt source snapshot-freshness --profiles-dir ./ci_profiles
 
         
 

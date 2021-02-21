@@ -19,7 +19,8 @@ customer_orders as (
         count(order_id) as number_of_orders,
         sum(amount) as lifetime_value,
         1 as dave,
-        1 as dave2
+        1 as dave2,
+        1 as dave3
 
     from orders
 

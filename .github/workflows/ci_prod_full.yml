@@ -40,11 +40,7 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         # role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
         role-duration-seconds: 1200
-        role-session-name: MySessionName
-
-    - name: Get the last manifest.json from s3
-      run: |
-        aws s3 cp s3://dbt-tutorial-sf/prod/manifest/manifest.json ./target/last_manifest/manifest.json 
+        role-session-name: MySessionName 
 
     - name: Deploy
       run: |
