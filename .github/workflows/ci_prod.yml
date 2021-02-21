@@ -56,7 +56,7 @@ jobs:
 
     - name: Upload manifest.json from s3
       run: |
-        aws s3 cp ./target/manifest.json  s3 cp s3://dbt-tutorial-sf/prod/manifest/manifest.json
+        aws s3 cp ./target/manifest.json s3://dbt-tutorial-sf/prod/manifest/manifest.json
 
 
         
