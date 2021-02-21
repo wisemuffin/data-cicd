@@ -51,8 +51,8 @@ jobs:
     - name: Deploy
       run: |
         dbt seed --select state:modified --state ./target/last_manifest --full-refresh --profiles-dir ./ci_profiles
-        dbt run --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
-        dbt test --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
+        dbt run --models state:modified --state ./target/last_manifest --profiles-dir ./ci_profiles
+        dbt test --models state:modified --state ./target/last_manifest --profiles-dir ./ci_profiles
 
 
         
