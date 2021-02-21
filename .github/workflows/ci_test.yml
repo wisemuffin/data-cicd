@@ -28,12 +28,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install dbt
-
-    # - name: Install AWS cli
-    #   run: |
-    #     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    #     unzip awscliv2.zip
-    #     sudo ./aws/install
     
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -48,7 +42,7 @@ jobs:
 
     - name: Get the last manifest.json from s3
       run: |
-        aws s3 cp s3://dbt-tutorial-sf/prod/manifest/manifest.json ./target/last_manifest.json 
+        aws s3 cp s3://dbt-tutorial-sf/prod/manifest/manifest.json ./target/last_manifest/manifest.json 
 
     - name: Deploy
       run: |
