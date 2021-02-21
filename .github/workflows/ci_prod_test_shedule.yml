@@ -3,7 +3,7 @@ name: Test Production Data Quality
 on:
   schedule:
     - cron:  '*/1 * * * *' # Run every day
-  workflow_dispatch
+  workflow_dispatch:
 
 
 env:
