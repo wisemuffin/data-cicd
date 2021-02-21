@@ -22,6 +22,11 @@ i want to only run models & tests for models, seeds, and tests that have changed
 
 Run on each pull request, and create separate schemas for each pull request.
 
+### sqlfluff
+```bash
+sqlfluff fix test.sql 
+```
+
 ### Steps
 
 - linting sql fluff
