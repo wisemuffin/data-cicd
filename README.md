@@ -1,5 +1,6 @@
-![](https://github.com/wisemuffin/dbt-tutorial-sf/workflows/Scheduled%20production%20run/badge.svg)
-![](https://github.com/wisemuffin/dbt-tutorial-sf/workflows/Production%20deployment%20from%20main/badge.svg)
+[![Full Production deployment from main](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_prod_full.yml/badge.svg)](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_prod_full.yml)
+[![Production deployment from main](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_prod.yml/badge.svg)](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_prod.yml)
+[![Test deployment from a PR](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_test.yml/badge.svg)](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_test.yml)
 
 # Testing out DBT
 
