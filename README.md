@@ -22,7 +22,9 @@ Run on each pull request, and create separate schemas for each pull request.
 - save state (artefact at the end of each run)
 
 ```bash
-dbt seed --select state:modified --state ./target/last_manifest/manifest.json --full-refresh
+aws s3 cp s3://dbt-tutorial-sf/prod/manifest/manifest.json ./target/last_manifest/manifest.json
+
+dbt seed --select state:modified --state ./target/last_manifest --full-refresh
 dbt run --models state:modified --defer --state ./target/last_manifest
 dbt test --models state:modified --defer --state ./target/last_manifest
 ```
