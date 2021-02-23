@@ -30,6 +30,9 @@ jobs:
         pip install dbt
         pip install sqlfluff
 
+    - name: Pre requisite before linting
+      run: git fetch origin main:refs/remotes/origin/main
+
     - name: Lint SQL
       run: |
         diff-quality --violations sqlfluff --compare-branch main
