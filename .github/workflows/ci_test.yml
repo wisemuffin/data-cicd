@@ -32,7 +32,7 @@ jobs:
 
     - name: Lint SQL
       run: |
-        diff-quality --violations sqlfluff --compare-branch origin/main
+        diff-quality --violations sqlfluff --compare-branch main
     
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
