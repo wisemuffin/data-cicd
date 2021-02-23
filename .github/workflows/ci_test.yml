@@ -33,12 +33,13 @@ jobs:
     - name: Pre requisite before linting
       run: |
         git fetch origin main
-        pwd
-        git branch
+
+    - name: Check this works
+      run: git diff origin/main HEAD
 
     - name: Lint SQL
       run: |
-        diff-quality --violations sqlfluff --compare-branch main
+        diff-quality --violations sqlfluff --compare-branch origin/main
     
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
