@@ -33,7 +33,7 @@ jobs:
     - name: Pre requisite before linting
       run: |
         git fetch origin main:refs/remotes/origin/main
-        git brach
+        git branch
 
     - name: Lint SQL
       run: |
