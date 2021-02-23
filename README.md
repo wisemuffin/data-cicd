@@ -21,7 +21,17 @@ I have set up two CI/CD jobs on a daily schedule to run all the automated tests,
 - [Run Data Quality Tests](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_prod_test_shedule.yml)
 - [Run Source Data Freshness Tests](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_prod_data_freshness_shedule.yml)
 
-## Deployment & Pull requests
+## Merging Pull Requests into main branch
+
+### steps
+
+- pull dbt models
+- run dbt models
+- save state (artefact at the end of each run)
+- generate dbt docs
+- host dbt docs on aws s3
+
+## Pull requests
 
 ### Goals 
 i want to only run models & tests for models, seeds, and tests that have changed. 
