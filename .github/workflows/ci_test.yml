@@ -32,7 +32,8 @@ jobs:
 
     - name: Pre requisite before linting
       run: |
-        git fetch origin main:refs/remotes/origin/main
+        git fetch origin main
+        pwd
         git branch
 
     - name: Lint SQL
