@@ -30,7 +30,13 @@ Run on each pull request, and create separate schemas for each pull request.
 
 ### sqlfluff
 ```bash
-sqlfluff fix test.sql 
+sqlfluff fix test.sql
+```
+
+for PRs only new / modified code is reviewed. Test this by doing:
+
+```bash
+diff-quality --violations sqlfluff --compare-branch origin/main 
 ```
 
 ### Steps
