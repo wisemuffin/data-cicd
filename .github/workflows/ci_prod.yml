@@ -59,7 +59,7 @@ jobs:
         aws s3 cp ./target/manifest.json s3://dbt-tutorial-sf/prod/manifest/manifest.json
 
     - name: Generate Docs
-      run: dbt docs generate --no-version-check
+      run: dbt docs generate --no-version-check --profiles-dir ./ci_profiles
     
     - name: Publish Docs
       run: |
