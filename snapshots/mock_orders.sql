@@ -4,15 +4,15 @@
 
 {{
     config(
-      target_database='analytics',
+      target_database=target.database,
       target_schema=new_schema,
-      unique_key='order_id',
+      unique_key='id',
 
       strategy='timestamp',
-      updated_at='updated_at',
+      updated_at='_etl_loaded_at',
     )
 }}
 
-select * from analytics.{{target.schema}}.mock_orders
+select * from {{ source('jaffle_shop', 'orders') }}
 
 {% endsnapshot %}
