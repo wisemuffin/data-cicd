@@ -17,9 +17,7 @@ customer_orders as (
         min(order_date) as first_order_date,
         max(order_date) as most_recent_order_date,
         count(order_id) as number_of_orders,
-        sum(amount) as lifetime_value,
-        1 as dave,
-        1 as dave2
+        sum(amount) as lifetime_value
 
     from orders
 
@@ -41,6 +39,8 @@ final as (
 
     from customers
     left join customer_orders using (customer_id)
+oin customer_orders using (customer_id)
+join customer_orders using (customer_id)
 
 
 )
