@@ -2,7 +2,7 @@ name: Test Production Data Quality
 
 on:
   schedule:
-    - cron:  '*/1 * * * *' # Run every day
+    - cron:  '0 1 * * *' # Run every day at 1am
   workflow_dispatch:
 
 
@@ -47,7 +47,7 @@ jobs:
 
     - name: Deploy
       run: |
-        dbt source snapshot-freshness --profiles-dir ./ci_profiles
+        dbt test --profiles-dir ./ci_profiles
 
 
         
