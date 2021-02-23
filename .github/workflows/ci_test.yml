@@ -32,13 +32,6 @@ jobs:
         pip install dbt
         pip install sqlfluff
 
-    - name: Pre requisite before linting
-      run: |
-        git fetch origin main
-
-    - name: Check this works
-      run: git diff origin/main HEAD
-
     - name: Lint SQL
       run: |
         diff-quality --violations sqlfluff --compare-branch origin/main
