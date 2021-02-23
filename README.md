@@ -28,6 +28,17 @@ i want to only run models & tests for models, seeds, and tests that have changed
 
 Run on each pull request, and create separate schemas for each pull request.
 
+### sqlfluff
+```bash
+sqlfluff fix test.sql
+```
+
+for PRs only new / modified code is reviewed. Test this by doing:
+
+```bash
+diff-quality --violations sqlfluff --compare-branch origin/main 
+```
+
 ### Steps
 
 - linting sql fluff
@@ -49,3 +60,7 @@ localy test out storing manifest.json in aws s3
 ```bash
 
 ```
+
+### Deploy tableau workbooks and data sources from PR
+
+TODO
