@@ -31,6 +31,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install dbt
         pip install sqlfluff
+        dbt deps
 
     - name: Lint SQL
       run: |
