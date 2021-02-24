@@ -5,23 +5,18 @@
 
 # Testing out DBT
 
+In this repo i am testing out setting up a CICD environment for dbt.
 
-
-# 'slim' CICD
-
-## Deployment of docs
-
-TODO
-- deploy to s3
-
-## Data Quality and Freshness
+# Data Quality and Freshness
 
 I have set up two CI/CD jobs on a daily schedule to run all the automated tests, and check for source system freshness:
 
 - [Run Data Quality Tests](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_prod_test_shedule.yml)
 - [Run Source Data Freshness Tests](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_prod_data_freshness_shedule.yml)
 
-## Merging Pull Requests into main branch
+# 'slim' CICD
+
+## Merging Pull Requests into main branch CICD
 
 ### steps
 
@@ -31,23 +26,13 @@ I have set up two CI/CD jobs on a daily schedule to run all the automated tests,
 - generate dbt docs
 - host dbt docs on aws s3
 
-## Pull requests
+## Pull requests CICD
 
 ### Goals 
 i want to only run models & tests for models, seeds, and tests that have changed. 
 
 Run on each pull request, and create separate schemas for each pull request.
 
-### sqlfluff
-```bash
-sqlfluff fix test.sql
-```
-
-for PRs only new / modified code is reviewed. Test this by doing:
-
-```bash
-diff-quality --violations sqlfluff --compare-branch origin/main 
-```
 
 ### Steps
 
@@ -66,10 +51,18 @@ dbt run --models state:modified --defer --state ./target/last_manifest
 dbt test --models state:modified --defer --state ./target/last_manifest
 ```
 
-localy test out storing manifest.json in aws s3
-```bash
 
+### sqlfluff examples
+```bash
+sqlfluff fix test.sql
 ```
+
+for PRs only new / modified code is reviewed. Test this by doing:
+
+```bash
+diff-quality --violations sqlfluff --compare-branch origin/main 
+```
+
 
 ### Deploy tableau workbooks and data sources from PR
 
