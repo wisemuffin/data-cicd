@@ -33,4 +33,8 @@ sources:
           error_after: {count: 24, period: hour}
         description: cases raised by customers for jaffle shop to resolve
         columns:
-          
+          - name: id
+            description: Primary key for orders.
+            tests:
+              - unique
+              - not_null
