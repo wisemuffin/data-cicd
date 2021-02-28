@@ -16,9 +16,9 @@ models:
       - name: order_id
         description: Primary key for orders.
         tests:
-          - relationships:
-              to: ref('stg_customers')
-              field: customer_id
+          # - relationships:
+          #     to: ref('stg_customers')
+          #     field: customer_id
       - name: status
         description: "{{ doc('order_status') }}"
         tests:

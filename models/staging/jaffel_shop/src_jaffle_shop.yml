@@ -36,5 +36,4 @@ sources:
           - name: id
             description: Primary key for orders.
             tests:
-              - unique
               - not_null
