@@ -1,10 +1,17 @@
 import os
+import logging
 import requests
+
+logging.basicConfig(level=logging.DEBUG)
 
 username = os.getenv("TABLEAU_USERNAME")
 password = os.getenv("TABLEAU_PASSWORD")
 site_id = "fd1b193d-6012-4c91-8054-50c3d6c666a3"
 api = os.getenv("TABLEAU_API")
+
+logging.debug(f"username: {username}")
+logging.debug(os.getcwd())
+logging.debug(os.environ)
 
 # get token
 def get_token() -> str:
@@ -17,7 +24,7 @@ def get_token() -> str:
     data = response.json()
     token = data["credentials"]["token"]
 
-    print(response.text)
+    logging.debug(response.text)
 
     return token
 
@@ -57,7 +64,7 @@ def get_datasource_by_id(id: str):
 
     response = requests.request("GET", url, headers=headers, data=payload)
 
-    print(response.text)
+    logging.debug(response.text)
 
 
 def filter_datasource(datasources_tableau: list, datasources_cicd: list) -> object:
@@ -136,18 +143,19 @@ def get_workbook_by_id(id: str):
 
     response = requests.request("GET", url, headers=headers, data=payload)
 
-    print(response.text)
+    logging.debug(response.text)
 
 
-token = get_token()
-datasources_tableau = get_datasources()
-datasources_cicd = ["FCT_ORDERS + FCT_CASE (DGRIFFITHS) relationships"]
-datasources_filtered = filter_datasource(datasources_tableau, datasources_cicd)
-for datasource in datasources_filtered:
-    get_datasource_by_id(datasource["id"])
+# token = get_token()
+# logging.debug(token)
+# datasources_tableau = get_datasources()
+# datasources_cicd = ["FCT_ORDERS + FCT_CASE (DGRIFFITHS) relationships"]
+# datasources_filtered = filter_datasource(datasources_tableau, datasources_cicd)
+# for datasource in datasources_filtered:
+#     get_datasource_by_id(datasource["id"])
 
-workbooks_tableau = get_workbooks()
-workbooks_cicd = ["Relationships vs Joins"]
-workbooks_filterd = filter_workbooks(workbooks_tableau, workbooks_cicd)
-for workbook in workbooks_filterd:
-    get_workbook_by_id(workbook["id"])
+# workbooks_tableau = get_workbooks()
+# workbooks_cicd = ["Relationships vs Joins"]
+# workbooks_filterd = filter_workbooks(workbooks_tableau, workbooks_cicd)
+# for workbook in workbooks_filterd:
+#     get_workbook_by_id(workbook["id"])
