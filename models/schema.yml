@@ -1,11 +1,10 @@
 version: 2
 
 exposures:
-  
-  - name: weekly_jaffle_metrics
-    type: dashboard                         # required
+  - name: Orders (Prod)
+    type: dashboard                        # required
     maturity: high                          # optional
-    url: https://bi.tool/dashboards/1       # optional
+    url: https://bi.tool/datasource/1       # optional
     description: >                          # optional
       Did someone say "exponential growth"?
     
@@ -17,25 +16,35 @@ exposures:
     owner:
       name: Claire from Data                # optional
       email: data@jaffleshop.com            # required
-
-      
-  - name: jaffle_recommender
-    maturity: medium
-    type: ml
-    url: https://jupyter.org/mycoolalg
-    description: >
-      Deep learning to power personalized "Discover Sandwiches Weekly"
+  
+  - name: Jaffle Shop - Orders by Customer
+    type: dashboard                         # required
+    maturity: high                          # optional
+    url: https://bi.tool/dashboards/1       # optional
+    description: >                          # optional
+      Did someone say "exponential growth"?
     
-    depends_on:
+    depends_on:                             # expected
       - ref('fct_orders')
-      
-    owner:
-      name: Data Science Drew
-      email: data@jaffleshop.com
+      - ref('dim_customers')
 
-      
-  - name: jaffle_wrapped
-    type: application
-    description: Tell users about their favorite jaffles of the year
-    depends_on: [ ref('fct_orders') ]
-    owner: { email: summer-intern@jaffleshop.com }
+    owner:
+      name: Claire from Data                # optional
+      email: data@jaffleshop.com            # required
+  
+  - name: Jaffle Shop - Orders by Week
+    type: dashboard                         # required
+    maturity: high                          # optional
+    url: https://bi.tool/dashboards/1       # optional
+    description: >                          # optional
+      Did someone say "exponential growth"?
+    
+    depends_on:                             # expected
+      - ref('fct_orders')
+      - ref('dim_customers')
+
+    owner:
+      name: Claire from Data                # optional
+      email: data@jaffleshop.com            # required
+
+  
