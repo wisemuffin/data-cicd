@@ -3,6 +3,7 @@ import time
 import logging
 
 import tableauserverclient as TSC
+import tableaudocumentapi as TDI
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -47,4 +48,10 @@ with server.auth.sign_in(tableau_auth):
             include_extract=True,
             no_extract=None,
         )
+
+# TODO Update datasource and workbook connections to be based on PR
+
+# sourceTDS = TDI.Datasource.from_file("world.tds")
+
+# TODO Publish datasource and workbooks
 
