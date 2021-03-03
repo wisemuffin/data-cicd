@@ -4,11 +4,11 @@ sourceTDS = TDI.Datasource.from_file(
     "./tableau/tab_downloads/datasources/Orders Prod.tds"
 )
 connections = sourceTDS.connections
-connections[0].dbname = "DBT_FUNDAMENTALS_PROD_CLONE"
-# connections[0]._connectionXML.attrib["schema"] = "PR_1614499491"
+connections[0].dbname = "DBT_FUNDAMENTALS_TEST"
+connections[0]._connectionXML.attrib["schema"] = "PR_1613809579"
 
 # create file
-sourceTDS.save_as("./tableau/tab_downloads/datasources/Orders Prod Clone.tds")
+sourceTDS.save_as("./tableau/tab_downloads/datasources/Orders PR_1613809579.tds")
 
 
 print([c for c in connections])

@@ -18,7 +18,7 @@ print(TSC.__version__)
 tableau_auth = TSC.TableauAuth(username, password, site_name)
 server = TSC.Server(tab_server)
 
-tds = "Orders Prod Clone.tds"
+tds = "Orders PR_1613809579.tds"
 # tds = "Orders Prod.tds"
 project_id = "b599e7e1-d59d-4690-9912-d9b23941d25c"
 
