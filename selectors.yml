@@ -1,4 +1,10 @@
 selectors:
+  - name: "standard_schedule"
+    definition: "tag:standard_schedule"
+  - name: "late_schedule"
+    definition: "tag:late_schedule"
+  - name: "hourly_schedule"
+    definition: "tag:hourly_schedule"
   - name: nightly_diet_snowplow
     description: "Non-incremental Snowplow models that power nightly exports"
     definition:

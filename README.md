@@ -9,10 +9,16 @@ In this repo i am testing out setting up a CICD environment for dbt.
 
 # Data Quality and Freshness
 
+## DBT DQ and freshness
+
 I have set up two CI/CD jobs on a daily schedule to run all the automated tests, and check for source system freshness:
 
 - [Run Data Quality Tests](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_prod_test_shedule.yml)
 - [Run Source Data Freshness Tests](https://github.com/wisemuffin/dbt-tutorial-sf/actions/workflows/ci_prod_data_freshness_shedule.yml)
+
+## great expecations
+
+Annother option is to use [great expectations](https://greatexpectations.io/)
 
 # 'slim' CICD
 
