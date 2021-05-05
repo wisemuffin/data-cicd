@@ -22,6 +22,10 @@ Annother option is to use [great expectations](https://greatexpectations.io/)
 
 # 'slim' CICD
 
+## github actions
+
+***note*** that when entering in github secrets, the snowflake account includes the region e.g. cg00000.ap-southeast-2
+
 ## Merging Pull Requests into main branch CICD
 
 ### steps
