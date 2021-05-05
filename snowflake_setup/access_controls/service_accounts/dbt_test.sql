@@ -71,4 +71,3 @@ CREATE USER
 
 // grant permissions to service account
 GRANT ROLE DBT_FUNDAMENTALS_TEST_TRANSFORMER TO USER DBT_DBT_FUNDAMENTALS_TEST_SERVICE_ACCOUNT;
-//=============================================================================
