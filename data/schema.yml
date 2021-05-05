@@ -1,7 +1,7 @@
 version: 2
 
 seeds:
-  - name: employees
+  - name: stg_employees
     description: a manual map of employees to customers
     columns:
         - name: employee_id
