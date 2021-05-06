@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: int_orders__pivoted
+    columns:
+      - name: order_id
+        tags:
+          - pk
+        tests:
+          - unique
+          - not_null

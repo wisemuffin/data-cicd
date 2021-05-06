@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: fct_orders
+    columns:
+      - name: order_id
+        tags:
+          - pk
+        tests:
+          - unique
+          - not_null

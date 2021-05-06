@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: fct_case
+    columns:
+      - name: case_id
+        tags:
+          - pk
+        tests:
+          - unique
+          - not_null

@@ -30,6 +30,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install dbt
+        pip install datafold-sdk
         dbt deps
     
     - name: Configure AWS Credentials
@@ -52,6 +53,13 @@ jobs:
     - name: Upload manifest.json from s3
       run: |
         aws s3 cp ./target/manifest.json s3://dbt-tutorial-sf/prod/manifest/manifest.json
+    
+    - name: datafold dbt upload
+      run: |
+       datafold dbt upload \
+        --ci-config 12 \
+        --run-type production \
+        --target-folder /tmp/checkout/target/
 
 
         
