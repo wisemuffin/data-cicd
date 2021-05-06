@@ -10,6 +10,7 @@ env:
   DBT_PROFILE_ROLE:              DBT_FUNDAMENTALS_TEST_TRANSFORMER
   DBT_PROFILE_DB:                DBT_FUNDAMENTALS_TEST
   DBT_PROFILE_WH:                DBT_FUNDAMENTALS_TEST_WH
+  DATAFOLD_APIKEY:               ${{ secrets.DATAFOLD_APIKEY }}
 
 jobs:
   prod:

@@ -14,6 +14,7 @@ env:
   DBT_PROFILE_DB:                DBT_FUNDAMENTALS_PROD
   DBT_PROFILE_SCHEMA:            STAGING
   DBT_PROFILE_WH:                DBT_FUNDAMENTALS_PROD_WH
+  DATAFOLD_APIKEY:               ${{ secrets.DATAFOLD_APIKEY }}
 
 jobs:
   prod:
