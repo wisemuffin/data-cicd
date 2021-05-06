@@ -10,8 +10,7 @@ env:
   DBT_PROFILE_ROLE:              DBT_FUNDAMENTALS_TEST_TRANSFORMER
   DBT_PROFILE_DB:                DBT_FUNDAMENTALS_TEST
   DBT_PROFILE_WH:                DBT_FUNDAMENTALS_TEST_WH
-  DATAFOLD_APIKEY:               ${{ secrets.DATAFOLD_APIKEY }}
-  DATAFOLD_HOST:                 ${{ secrets.DATAFOLD_HOST }}
+  DATAFOLD_APIKEY:               tiW3kEqcwNEjTZhVMAxBTXvbkbidkH6oWpfLcRta
 
 jobs:
   test:
@@ -69,10 +68,18 @@ jobs:
         dbt run --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
         dbt test --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
 
-    - name: Datafold dbt upload check
+    - name: Datafold dbt upload check manifest
       run: |
+        echo $DATAFOLD_APIKEY
         ls ./target
         cat ./target/manifest.json
+
+    - name: Datafold dbt upload check run_results.json
+      run: |
+        pwd
+        ls
+        ll
+        cat ./target/run_results.json
 
     - name: Datafold dbt upload
       run: |
