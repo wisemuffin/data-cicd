@@ -55,12 +55,9 @@ jobs:
       run: |
         aws s3 cp ./target/manifest.json s3://dbt-tutorial-sf/prod/manifest/manifest.json
     
-    - name: datafold dbt upload
+    - name: Datafold dbt upload
       run: |
-       datafold dbt upload \
-        --ci-config-id 12 \
-        --run-type production \
-        --target-folder ./target/
+       datafold dbt upload --ci-config-id 12 --run-type production --target-folder ./target
 
 
         
