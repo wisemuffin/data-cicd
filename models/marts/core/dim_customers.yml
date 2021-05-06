@@ -5,7 +5,7 @@ models:
     columns:
       - name: customer_id
         tags:
-          - pk
+          - pk_tag
         tests:
           - unique
           - not_null
