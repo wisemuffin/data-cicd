@@ -82,6 +82,7 @@ jobs:
     - name: Datafold dbt upload
       run: |
         pwd
-        datafold dbt upload --ci-config-id 12 --run-type pull_request --target-folder /home/runner/work/data-cicd/data-cicd/target/
+        echo $GITHUB_SHA
+        datafold dbt upload --ci-config-id 12 --run-type pull_request --target-folder /home/runner/work/data-cicd/data-cicd/target/ --commit-sha $GITHUB_SHA
   
     
