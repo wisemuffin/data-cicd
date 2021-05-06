@@ -75,9 +75,6 @@ jobs:
         cat ./target/manifest.json
     
     - name: Datafold dbt upload check2
-      with:
-          DATAFOLD_APIKEY: ${{ secrets.DATAFOLD_APIKEY}}
-          DATAFOLD_HOST: ${{ secrets.DATAFOLD_HOST}}
       run: |
         echo $DATAFOLD_APIKEY
         echo dave
