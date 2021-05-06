@@ -11,9 +11,10 @@ env:
   DBT_PROFILE_DB:                DBT_FUNDAMENTALS_TEST
   DBT_PROFILE_WH:                DBT_FUNDAMENTALS_TEST_WH
   DATAFOLD_APIKEY:               ${{ secrets.DATAFOLD_APIKEY }}
+  DATAFOLD_HOST:                 ${{ secrets.DATAFOLD_HOST }}
 
 jobs:
-  prod:
+  test:
     runs-on: ubuntu-latest
 
     steps:
