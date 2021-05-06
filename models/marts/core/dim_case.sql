@@ -1,3 +1,7 @@
+{{ config(
+    tags=["pl"]
+) }}
+
 select
     case_id,
     type,

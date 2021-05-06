@@ -10,6 +10,7 @@ env:
   DBT_PROFILE_ROLE:              DBT_FUNDAMENTALS_TEST_TRANSFORMER
   DBT_PROFILE_DB:                DBT_FUNDAMENTALS_TEST
   DBT_PROFILE_WH:                DBT_FUNDAMENTALS_TEST_WH
+  DATAFOLD_APIKEY:               ${{ secrets.DATAFOLD_APIKEY }}
 
 jobs:
   prod:
@@ -31,6 +32,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install dbt
         pip install sqlfluff
+        pip install datafold-sdk
         dbt deps
 
     - name: Lint SQL
@@ -65,6 +67,13 @@ jobs:
         dbt seed --select state:modified --state ./target/last_manifest --full-refresh --profiles-dir ./ci_profiles
         dbt run --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
         dbt test --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
+
+    - name: datafold dbt upload
+      run: |
+       datafold dbt upload \
+        --ci-config-id 12 \
+        --run-type pull_request \
+        --target-folder ./target/
     
     
     

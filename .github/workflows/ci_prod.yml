@@ -14,6 +14,7 @@ env:
   DBT_PROFILE_DB:                DBT_FUNDAMENTALS_PROD
   DBT_PROFILE_SCHEMA:            STAGING
   DBT_PROFILE_WH:                DBT_FUNDAMENTALS_PROD_WH
+  DATAFOLD_APIKEY:               ${{ secrets.DATAFOLD_APIKEY }}
 
 jobs:
   prod:
@@ -32,6 +33,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install dbt
+        pip install datafold-sdk
         dbt deps
     
     - name: Configure AWS Credentials
@@ -67,6 +69,13 @@ jobs:
         aws s3 cp ./target/index.html s3://dbt-tutorial-sf/
         aws s3 cp ./target/catalog.json s3://dbt-tutorial-sf/
         aws s3 cp ./target/manifest.json s3://dbt-tutorial-sf/
+    
+    - name: datafold dbt upload
+      run: |
+       datafold dbt upload \
+        --ci-config-id 12 \
+        --run-type production \
+        --target-folder ./target/
 
 
         
