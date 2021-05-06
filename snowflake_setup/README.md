@@ -1,3 +1,16 @@
+# Principals of access controls
+- every role created needs to be granted to sysadmin
+
+# infrastructure
+
+## Databases
+
+- DBT_FUNDAMENTALS_DEV - schema per developer
+- DBT_FUNDAMENTALS_TEST - schema per pull request to UAT and test pull requests
+- DBT_FUNDAMENTALS_PROD - production
+- PC_FIVETRAN_DB - fivetrans required setup, same purpose as raw.
+- RAW - data loaded into the warehouse in a raw format
+
 # Setup order
 
 - start a free trial with snowflake

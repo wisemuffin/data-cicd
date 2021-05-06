@@ -10,7 +10,17 @@ This repo shows how you can utilise CICD to speed up data development.
 
 Key to this is isolating every change (each feature/branch) against production data. Rebuilding your entire warehouse for each feature/branch would be supper expensive. However, if know your data lineage, you can build all the models you have changed and point them to production dependencies. This drastically reduces cost and time to test your changes.
 
-## DBT
+## Goals of this project
+
+- speed up incident response - lineage
+- prevent breaking changes - regression, data profiling
+- optimize the infrastructure - reduce CICD build times
+- find the right data asset for the problem - data catalogue
+
+## Standardizes code patterns - DBT
+
+Lower barrier for new users to start contributing.
+People understand each other’s code better and make fewer mistakes..
 
 Data build tool [DBT](https://www.getdbt.com/) comes with some awesome features for CICD:
 
@@ -100,6 +110,29 @@ I have set up two CI/CD jobs on a daily schedule to run all the automated tests,
 Another option is to use [great expectations](https://greatexpectations.io/)
 
 - With [great expectations](https://greatexpectations.io/) as its decoupled from the transform layer (DBT) we can use [great expectations](https://greatexpectations.io/) during the ingest layer e.g. with spark.
+
+### Data Quality - Datafold
+
+With version control we are able to review code changes. However with data we also need to do regression testing to understand how our changes impact the state of the warehouse.
+
+[Datafold](https://docs.datafold.com/using-datafold/data-diff-101-comparing-datasets) will automatically generate data profiling between your commit and a target e.g. production.
+
+Checkout some of my pull/merge requests which contain a summary of data regression and links to more detailed profiling.
+
+key features of [Datafold data diffing](https://docs.datafold.com/using-datafold/data-diff-101-comparing-datasets)
+- table schema diff (which columns have changed)
+- primary key not null or duplicate tests
+- column data profiling (e.g. dev branch vs prod)
+- data diff at a primary key level
+- shows how datasets change over time
+
+Other [Datafold](https://docs.datafold.com/using-datafold/data-diff-101-comparing-datasets) capabilities:
+- data catalogue
+- metric monitoring & alerting
+
+#### Datafold best practices
+
+- Use sampling when data profiling large data sets.
 
 ## Data Orchestration
 
