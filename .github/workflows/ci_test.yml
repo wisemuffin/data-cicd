@@ -70,7 +70,12 @@ jobs:
 
     - name: Datafold dbt upload
       run: |
-       datafold dbt upload --ci-config-id 12 --run-type pull_request --target-folder ./target
+        ls ./target
+        cat ./target/manifest.json
+
+    - name: Datafold dbt upload
+      run: |
+       datafold dbt upload --ci-config-id 12 --run-type pull_request --target-folder ./target/
     
     
     
