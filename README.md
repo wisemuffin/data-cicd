@@ -58,8 +58,8 @@ Here we want to give the developer feedback on:
 #### Steps
 
 - linting sql fluff
-- fetch manifest.json at start of each run
-- clone prod models into CI DB CAN REMOVE with --defer
+- fetch manifest.json at start of each run from the prior run
+- use DBT's slim CI to review what models state has changed
 - dbt seed, run, test only models whos state was modified
 - save state (artefact at the end of each run)
 
