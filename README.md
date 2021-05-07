@@ -134,6 +134,16 @@ Other [Datafold](https://docs.datafold.com/using-datafold/data-diff-101-comparin
 
 - Use sampling when data profiling large data sets.
 
+#### Datafold CICD Github actions
+
+Datafold's CLI when using dbt, will grab the dbt_project/target/manifest.json and run_results.json and send them along with your commit.
+
+With Github's pull_request event some extra steps are required: Github really runs Actions on merge commit. They merge PR branch into the base branch and run on top of that. Thus your SHA changes.
+
+Thank you Alex Morozov (Datafold) for showing me the original PR_HEAD_SHA can be extracted via:
+
+PR_HEAD_SHA=$(cat $GITHUB_EVENT_PATH | jq -r .pull_request.head.sha)
+
 ## Data Orchestration
 
 See [airflow-dbt](https://github.com/wisemuffin/airflow-dbt)
