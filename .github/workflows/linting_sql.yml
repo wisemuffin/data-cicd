@@ -9,8 +9,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    - name: Checkout Main
+      uses: actions/checkout@v2
+      with:
+        path: main
+
     steps:
-    - name: Checkout branch
+    - name: Checkout PR branch
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
