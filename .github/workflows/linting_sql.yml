@@ -9,12 +9,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    steps:
     - name: Checkout Main
       uses: actions/checkout@v2
       with:
         path: main
-
-    steps:
+        
     - name: Checkout PR branch
       uses: actions/checkout@v2
       with:
