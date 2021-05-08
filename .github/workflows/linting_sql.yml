@@ -32,4 +32,8 @@ jobs:
 
     - name: Lint SQL
       run: |
+        git branch
+        
+    - name: Lint SQL
+      run: |
         diff-quality --violations sqlfluff --compare-branch main
