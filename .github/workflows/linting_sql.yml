@@ -83,7 +83,7 @@ jobs:
       # returns very unclear errors when this occurs.
       run : |
         export DBT_PROFILE_SCHEMA=pr_$(date +%s)
-        dbt compile --profiles-dir ./ci_profiles
+        dbt compile --models state:modified --defer --state ./target/last_manifest --profiles-dir ./ci_profiles
 
     - name: Lint dbt models
       if: steps.get_files_to_lint.outputs.lintees != ''
