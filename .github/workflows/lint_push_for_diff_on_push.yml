@@ -1,12 +1,12 @@
-name: Lint from a PR (only diff)
+name: Lint from a push (only diff)
 
-on: pull_request
+on: push
 
 env:
   DBT_PROFILE_TARGET:            test
 
 jobs:
-  lint_for_diffs:
+  lint_for_diffs_on_push:
     runs-on: ubuntu-latest
 
     steps:
