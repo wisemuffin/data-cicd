@@ -23,7 +23,7 @@ jobs:
         ref: ${{ github.event.pull_request.head.sha }}
     
     - name: fetch main branch for sqlfluff to compare
-      run: git fetch main
+      run: git fetch origin main
 
     - name: Install Python 3.7
       uses: actions/setup-python@v1
