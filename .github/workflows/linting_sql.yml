@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install jq to parse json
-      run: sudo apt-get install jq
-
     - name: event info
       run: |
         jq . $GITHUB_EVENT_PATH
@@ -20,7 +17,7 @@ jobs:
     - name: Checkout PR branch
       uses: actions/checkout@v2
       with:
-        ref: ${{ github.event.pull_request.head.sha }}
+        fetch-depth: '0'
     
     - name: fetch main branch for sqlfluff to compare
       run: git fetch origin main
