@@ -52,3 +52,11 @@ jobs:
     - name: Lint SQL
       run: |
         diff-quality --violations sqlfluff --compare-branch original_main
+
+    - name: check pr
+      run: cat ./models/core/fct_orders.sql
+    
+    - name: check main
+      run: |
+        git checkout main
+        cat ./models/core/fct_orders.sql
