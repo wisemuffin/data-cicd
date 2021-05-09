@@ -15,7 +15,7 @@ order_payments as (
 ),
 
 final as (
-    select
+    SELECT
         orders.order_id,
         orders.customer_id,
         orders.order_date,
