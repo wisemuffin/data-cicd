@@ -25,15 +25,7 @@ jobs:
         git log -5
 
     - name: fetch main branch for sqlfluff to compare
-      run: git fetch origin main:main
-
-    - name: Checkout PR_HEAD_SHA so that we can review sqlfluff changes
-      run: |
-        git checkout $(cat $GITHUB_EVENT_PATH | jq -r .pull_request.head.sha)
-
-    - name: Checkout PR_HEAD_SHA so that we can review sqlfluff changes
-      run: |
-        git branch    
+      run: git fetch origin main:main  
 
     - name: Install Python 3.7
       uses: actions/setup-python@v1
