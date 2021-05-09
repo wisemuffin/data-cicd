@@ -34,15 +34,15 @@ jobs:
     #     dbt deps
 
     - name: Setup conda environment
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          activate-environment: dbt-sqlfluff-env
-          python-version: ${{ matrix.python-version }}
-          auto-update-conda: true
-          auto-activate-base: false
-          environment-file: environment.yml
-          show-channel-urls: true
-          # use-only-tar-bz2: true
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: dbt-sqlfluff-env
+        python-version: ${{ matrix.python-version }}
+        auto-update-conda: true
+        auto-activate-base: false
+        environment-file: environment.yml
+        show-channel-urls: true
+        # use-only-tar-bz2: true
 
     - name: Get changed files
       id: get_file_changes
