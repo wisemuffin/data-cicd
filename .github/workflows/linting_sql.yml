@@ -10,26 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: event info
-      run: |
-        jq . $GITHUB_EVENT_PATH
-    
     - name: Checkout PR branch
       uses: actions/checkout@v2
       with:
         fetch-depth: '0'
+
+    - name: event info
+      run: |
+        jq . $GITHUB_EVENT_PATH
 
     - name: Show that github merge request merge's PR_HEAD_SHA into main branch
       run: |
         git branch
         git log -5
 
+    - name: fetch main branch for sqlfluff to compare
+      run: git fetch origin main:main
+
     - name: Checkout PR_HEAD_SHA so that we can review sqlfluff changes
       run: |
         git checkout $(cat $GITHUB_EVENT_PATH | jq -r .pull_request.head.sha)
 
-    - name: fetch main branch for sqlfluff to compare
-      run: git fetch origin main
+    - name: Checkout PR_HEAD_SHA so that we can review sqlfluff changes
+      run: |
+        git branch    
 
     - name: Install Python 3.7
       uses: actions/setup-python@v1
