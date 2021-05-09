@@ -23,6 +23,7 @@ jobs:
       run: |
         git fetch origin main:main  
         git branch
+        git log -20
 
     - name: Install Python 3.7
       uses: actions/setup-python@v1
