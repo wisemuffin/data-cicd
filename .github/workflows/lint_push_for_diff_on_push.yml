@@ -22,8 +22,9 @@ jobs:
       run: git branch
       
     - run: |
-        git fetch --no-tags --depth=10000 origin main
-        git checkout -b main
+        git fetch origin main
+        git branch
+        git checkout main
         git log -20
         cat ./models/marts/core/fct_orders.sql
         git checkout ${{ github.event.pull_request.head.sha }}
