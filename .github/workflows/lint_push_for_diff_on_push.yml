@@ -12,6 +12,14 @@ jobs:
     steps:
     - name: Checkout PR by removing the merge into main
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: List all the remote branches
+      run: git branch -r
+    
+    - name: List all the local branches
+      run: git branch
       
     - run: |
         git fetch --no-tags --depth=10000 origin main
