@@ -18,7 +18,16 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: '0'
-    
+
+    - name: Show that github merge request merge's PR_HEAD_SHA into main branch
+      run: |
+        git branch
+        git log -5
+
+    - name: Checkout PR_HEAD_SHA so that we can review sqlfluff changes
+      run: |
+        git checkout $(cat $GITHUB_EVENT_PATH | jq -r .pull_request.head.sha)
+
     - name: fetch main branch for sqlfluff to compare
       run: git fetch origin main
 
@@ -32,11 +41,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install dbt
         pip install sqlfluff
-
-    - name: Lint SQL check
-      run: |
-        git branch
-        git log -5
 
     - name: Lint SQL
       run: |
