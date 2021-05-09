@@ -31,6 +31,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install dbt
         pip install sqlfluff
+        dbt deps
 
     - name: Get changed files
       id: get_file_changes
