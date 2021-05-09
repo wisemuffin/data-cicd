@@ -34,7 +34,7 @@ jaffle_shop:
       threads: 8
       client_session_keep_alive: False
 
-    jaffel_shop:
+    jaffle_shop:
       type: snowflake
       account: "{{ env_var('DBT_PROFILE_SNOWFLAKE_ACCOUNT') }}"
 

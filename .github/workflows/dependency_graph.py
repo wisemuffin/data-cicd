@@ -121,5 +121,5 @@ def run():
 
 # RUN IT
 DBT_DIR = "."
-MODEL_SELECTOR_VALUE = "jaffel_shop"
+MODEL_SELECTOR_VALUE = "jaffle_shop"
 run()
