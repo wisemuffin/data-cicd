@@ -1,4 +1,4 @@
-name: Lint from a PR
+name: Lint from a PR (only changed files)
 
 on: pull_request
 
@@ -15,29 +15,6 @@ jobs:
       with:
         fetch-depth: '0'
 
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: |
-        echo "$GITHUB_CONTEXT"
-        echo ${{ github.event.pull_request.title }}
-
-    - name: event info
-      run: |
-        jq . $GITHUB_EVENT_PATH
-
-    - name: fetch main branch for sqlfluff to compare
-      run: |
-        git fetch origin main:original_main  
-        git branch
-        git log -20
-
-    - name: DELETE this step
-      run: |
-        git checkout original_main  
-        git branch
-        git log -20
-
     - name: Install Python 3.7
       uses: actions/setup-python@v1
       with:
@@ -49,6 +26,38 @@ jobs:
         pip install dbt
         pip install sqlfluff
 
-    - name: Lint SQL
-      run: |
-        diff-quality --violations sqlfluff --compare-branch original_main
+     - name: Get changed files
+        id: get_file_changes
+        uses: trilom/file-changes-action@v1.2.3
+        with:
+          output: ' '
+
+      - name: Get changed .sql files in /models and /analysis to lint
+        id: get_files_to_lint
+        shell: bash -l {0}
+        # Full credit for this step to Teghan Nightengale!
+        run: |
+          # Set the command in the $() brackets as an output to use in later steps
+          echo "::set-output name=lintees::$(
+          # Issue where grep regular expressions don't work as expected on the
+          # Github Actions shell, check models/ and analysis/ folders seperately
+          echo \
+          $(echo ${{ steps.get_file_changes.outputs.files }} |
+          tr -s ' ' '\n' |
+          grep -E '^models.*[.]sql$' |
+          tr -s '\n' ' ') \
+          $(echo ${{ steps.get_file_changes.outputs.files }} |
+          tr -s ' ' '\n' |
+          grep -E '^analysis.*[.]sql$' |
+          tr -s '\n' ' ')
+          )"
+
+    # - name: Lint SQL
+    #   run: |
+    #     diff-quality --violations sqlfluff --compare-branch original_main
+
+    - name: Lint dbt models
+        if: steps.get_files_to_lint.outputs.lintees != ''
+        shell: bash -l {0}
+        run: |
+          sqlfluff lint ${{ steps.get_files_to_lint.outputs.lintees }}
