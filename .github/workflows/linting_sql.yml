@@ -10,28 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Main
-      uses: actions/checkout@v2
-      with:
-        ref: main
-        
-    - name: Lint SQL - check
-      run: |
-        git branch
-        
-    - name: Checkout PR branch
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
+    - name: Install jq to parse json
+      run: sudo apt-get install jq
 
     - name: event info
       run: |
-        echo ${{ github.event }}
-        
+        echo ${{ github.event }} | jq .
+    
     - name: Checkout PR branch
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
+    
+    - name: fetch main branch for sqlfluff to compare
+      run: git fetch main
 
     - name: Install Python 3.7
       uses: actions/setup-python@v1
