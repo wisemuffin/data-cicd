@@ -33,13 +33,7 @@ jobs:
 
     - name: Checkout PR_HEAD_SHA so that we can review sqlfluff changes
       run: |
-        git branch  
-
-    - name: checkout main and review
-      run: |
-        git checkout main
-        git branch
-        git log -2   
+        git branch    
 
     - name: Install Python 3.7
       uses: actions/setup-python@v1

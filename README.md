@@ -68,7 +68,8 @@ Here we want to give the developer feedback on:
 
 ### sql linter sqlfluff
 
-!issue currently PR main contains the merge of main + feature, thus comparisons show no difference.
+when running diff-quality on github pull requests with master watch out for the checkout action that will checkout the the megre of your latest commit with the base branch. See [example of the issue here](https://stackoverflow.com/questions/58630097/github-actions-error-cannot-see-git-diff-to-master).
+
 
 In order to standardise sql styles across developer you can use a linter like sqlfluff to set coding standards.
 
