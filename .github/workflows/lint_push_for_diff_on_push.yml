@@ -78,8 +78,18 @@ jobs:
     - name: Lint SQL 2
       run: |
         diff-quality --violations sqlfluff --compare-branch main
+
     
     - name: check main
       run: |
         git checkout main
         cat ./models/marts/core/fct_orders.sql
+    
+    - name: check again feature/sqlfluff_lint_fix2
+      run: |
+        git checkout feature/sqlfluff_lint_fix2
+        diff-quality --violations sqlfluff --compare-branch origin/main
+    
+    - name: check again feature/sqlfluff_lint_fix2 sqlfluff
+      run: |
+        sqlfluff lint
