@@ -4,6 +4,12 @@ on: pull_request
 
 env:
   DBT_PROFILE_TARGET:            test
+  DBT_PROFILE_SNOWFLAKE_ACCOUNT: ${{ secrets.DBT_PROFILE_SNOWFLAKE_ACCOUNT }}
+  DBT_PROFILE_USER:              ${{ secrets.DBT_PROFILE_TEST_USER }}
+  DBT_PROFILE_PASSWORD:          ${{ secrets.DBT_PROFILE_TEST_PASSWORD }}
+  DBT_PROFILE_ROLE:              DBT_FUNDAMENTALS_TEST_TRANSFORMER
+  DBT_PROFILE_DB:                DBT_FUNDAMENTALS_TEST
+  DBT_PROFILE_WH:                DBT_FUNDAMENTALS_TEST_WH
 
 jobs:
   lint_PR_for_file_changes:
@@ -54,6 +60,13 @@ jobs:
     # - name: Lint SQL
     #   run: |
     #     diff-quality --violations sqlfluff --compare-branch original_main
+
+    - name: Check dbt can connect to data warehouse and compile on its own.
+        # Call dbt separately here to try and catch a more verbose version of
+        # errors related to connection and profiles.yml issues since SQLFluff
+        # returns very unclear errors when this occurs.
+        run : |
+          dbt compile --profiles-dir ./ci_profiles
 
     - name: Lint dbt models
       if: steps.get_files_to_lint.outputs.lintees != ''
