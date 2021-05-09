@@ -15,7 +15,7 @@ jobs:
 
     - name: event info
       run: |
-        echo ${{ github.event }} | jq .
+        jq . $GITHUB_EVENT_PATH
     
     - name: Checkout PR branch
       uses: actions/checkout@v2
