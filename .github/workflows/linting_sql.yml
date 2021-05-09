@@ -13,7 +13,7 @@ jobs:
     - name: Checkout PR by removing the merge into main
       uses: actions/checkout@v2
       with:
-        ref: ${{ github.head_ref }}
+        fetch-depth: '0'
 
     - name: Dump GitHub context
       env:
@@ -26,13 +26,9 @@ jobs:
       run: |
         jq . $GITHUB_EVENT_PATH
 
-    - name: event info
-      run: |
-        jq ${{ github.event.pull_request.title }}
-
     - name: fetch main branch for sqlfluff to compare
       run: |
-        git fetch origin main:main  
+        git fetch origin main:original_main  
         git branch
         git log -20
 
@@ -49,4 +45,4 @@ jobs:
 
     - name: Lint SQL
       run: |
-        diff-quality --violations sqlfluff --compare-branch origin/main
+        diff-quality --violations sqlfluff --compare-branch original_main
