@@ -12,9 +12,14 @@ jobs:
     steps:
     - name: Checkout PR by removing the merge into main
       uses: actions/checkout@v2
-      with:
-        fetch-depth: '0'
+      run: |
+        git fetch --no-tags --depth=1 origin main
+        git checkout -b main
+        git checkout ${{ github.event.pull_request.head.sha }}
+      # with:
+      #   fetch-depth: '0'
         # ref: ${{ github.event.pull_request.head.sha }}
+      
     
     # - name: git branch temp setup
     #   run: |
@@ -27,6 +32,7 @@ jobs:
     - name: git branch temp setup
       run: |
         git branch
+        git log -20
 
     - name: Dump GitHub context
       env:
@@ -39,11 +45,11 @@ jobs:
       run: |
         jq . $GITHUB_EVENT_PATH
 
-    - name: fetch main branch for sqlfluff to compare
-      run: |
-        git fetch origin main:main  
-        git branch
-        git log -20
+    # - name: fetch main branch for sqlfluff to compare
+    #   run: |
+    #     git fetch origin main:main  
+    #     git branch
+    #     git log -20
 
     # - name: DELETE this step
     #   run: |
