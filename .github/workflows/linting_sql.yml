@@ -62,11 +62,11 @@ jobs:
     #     diff-quality --violations sqlfluff --compare-branch original_main
 
     - name: Check dbt can connect to data warehouse and compile on its own.
-        # Call dbt separately here to try and catch a more verbose version of
-        # errors related to connection and profiles.yml issues since SQLFluff
-        # returns very unclear errors when this occurs.
-        run : |
-          dbt compile --profiles-dir ./ci_profiles
+      # Call dbt separately here to try and catch a more verbose version of
+      # errors related to connection and profiles.yml issues since SQLFluff
+      # returns very unclear errors when this occurs.
+      run : |
+        dbt compile --profiles-dir ./ci_profiles
 
     - name: Lint dbt models
       if: steps.get_files_to_lint.outputs.lintees != ''
