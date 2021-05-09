@@ -56,9 +56,10 @@ jobs:
     - name: check pr
       run: |
         pwd
-        cat models/core/fct_orders.sql
+        ls
+        cat ./models/marts/core/fct_orders.sql
     
     - name: check main
       run: |
         git checkout main
-        cat models/core/fct_orders.sql
+        cat ./models/marts/core/fct_orders.sql
