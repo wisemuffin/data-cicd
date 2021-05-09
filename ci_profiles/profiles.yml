@@ -33,4 +33,17 @@ jaffle_shop:
 
       threads: 8
       client_session_keep_alive: False
-      
+
+    jaffel_shop:
+      type: snowflake
+      account: "{{ env_var('DBT_PROFILE_SNOWFLAKE_ACCOUNT') }}"
+
+      user:      "{{ env_var('DBT_PROFILE_USER') }}"
+      password:  "{{ env_var('DBT_PROFILE_PASSWORD') }}"
+      role:      "{{ env_var('DBT_PROFILE_ROLE') }}"
+      database:  "{{ env_var('DBT_PROFILE_DB') }}"
+      warehouse: "{{ env_var('DBT_PROFILE_WH') }}"
+      schema:    "{{ env_var('DBT_PROFILE_SCHEMA') }}"
+
+      threads: 8
+      client_session_keep_alive: False
