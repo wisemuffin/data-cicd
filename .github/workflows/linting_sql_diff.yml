@@ -6,7 +6,7 @@ env:
   DBT_PROFILE_TARGET:            test
 
 jobs:
-  lint for diffs:
+  lint_for_diffs:
     runs-on: ubuntu-latest
 
     steps:
