@@ -15,13 +15,17 @@ jobs:
       with:
         fetch-depth: '0'
     
+    # - name: git branch temp setup
+    #   run: |
+    #     git config --global user.email "temp_branch@example.com"
+    #     git config --global user.name "temp_branch"
+    #     git checkout -b temp
+    #     git add .
+    #     git commit -am "temp branch of pr"
+
     - name: git branch temp setup
       run: |
-        git config --global user.email "temp_branch@example.com"
-        git config --global user.name "temp_branch"
-        git checkout -b temp
-        git add .
-        git commit -am "temp branch of pr"
+        git branch
 
     - name: Dump GitHub context
       env:
