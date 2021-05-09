@@ -26,6 +26,10 @@ jobs:
       run: |
         jq . $GITHUB_EVENT_PATH
 
+    - name: check pr
+      run: |
+        cat ./models/marts/core/fct_orders.sql
+
     - name: fetch main branch for sqlfluff to compare
       run: |
         git fetch origin main:original_main  
@@ -55,8 +59,6 @@ jobs:
 
     - name: check pr
       run: |
-        pwd
-        ls
         cat ./models/marts/core/fct_orders.sql
     
     - name: check main
