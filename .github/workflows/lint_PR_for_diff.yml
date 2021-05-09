@@ -41,13 +41,13 @@ jobs:
 
     - name: fetch main branch for sqlfluff to compare
       run: |
-        git fetch origin main:original_main  
+        git fetch origin main:main  
         git branch
         git log -20
 
     # - name: DELETE this step
     #   run: |
-    #     git checkout original_main  
+    #     git checkout main  
     #     git branch
     #     git log -20
 
@@ -64,7 +64,7 @@ jobs:
 
     - name: Lint SQL
       run: |
-        diff-quality --violations sqlfluff --compare-branch original_main
+        diff-quality --violations sqlfluff --compare-branch main
 
     - name: check pr
       run: |
@@ -77,7 +77,7 @@ jobs:
     
     - name: Lint SQL 2
       run: |
-        diff-quality --violations sqlfluff --compare-branch original_main
+        diff-quality --violations sqlfluff --compare-branch main
     
     - name: check main
       run: |
