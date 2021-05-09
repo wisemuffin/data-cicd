@@ -15,16 +15,20 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
 
-    - name: Step that prints name of pull request's base branch
-      run: |
-        echo "Pull request's base branch is: ${BASE_BRANCH}"
+    - name: Dump GitHub context
       env:
-        BASE_BRANCH: ${{ github.base_ref }}
-      if: github.event_name == 'pull_request'
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: |
+        echo "$GITHUB_CONTEXT"
+        echo ${{ github.event.pull_request.title }}
 
     - name: event info
       run: |
         jq . $GITHUB_EVENT_PATH
+
+    - name: event info
+      run: |
+        jq ${{ github.event.pull_request.title }}
 
     - name: fetch main branch for sqlfluff to compare
       run: |
