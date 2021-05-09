@@ -32,6 +32,12 @@ jobs:
         git branch
         git log -20
 
+    - name: DELETE this step
+      run: |
+        git checkout original_main  
+        git branch
+        git log -20
+
     - name: Install Python 3.7
       uses: actions/setup-python@v1
       with:
