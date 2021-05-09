@@ -12,15 +12,17 @@ Key to this is isolating every change (each feature/branch) against production d
 
 ## Goals of this project
 
-- speed up incident response - lineage
-- prevent breaking changes - regression, data profiling
-- optimize the infrastructure - reduce CICD build times
-- find the right data asset for the problem - data catalogue
+- Speed up deployment
+- Speed up incident response - lineage
+- Prevent breaking changes - regression, data profiling
+- Optimize the infrastructure - reduce CICD build times
+- Find the right data asset for the problem - data catalogue
+- Reduce barriers to entry for changing data models. By providing guardrails such as testing, linting, and code review I can provide safety nets for devlopers/analysts to contribute code changes.
 
 ## Standardizes code patterns - DBT
 
-Lower barrier for new users to start contributing.
-People understand each other’s code better and make fewer mistakes..
+- Lower barrier for new users to start contributing.
+- People understand each other’s code better and make fewer mistakes..
 
 Data build tool [DBT](https://www.getdbt.com/) comes with some awesome features for CICD:
 
@@ -33,50 +35,43 @@ Data build tool [DBT](https://www.getdbt.com/) comes with some awesome features 
 
 Github actions have been set up to perform CICD:
 
-- Merging Pull Requests into main branch CICD
-- Pull requests CICD
+- Continious Deployment - Merging Pull Requests into main branch kicks off deploying into production.
+- Creating a pull requests kicks off Continuous integration by deploying into a test schema, running testing, linting and data profiling .
 
-***note*** that when entering in github secrets, the snowflake account includes the region e.g. cg00000.ap-southeast-2
-
-### Merging Pull Requests into main branch CICD
+### Merging Pull Requests into main branch - Continuous Delivery
 
 #### steps
 
-- pull dbt models
-- run dbt models
+- checkout code
+- deploy dbt models
 - save state (artefact at the end of each run)
 - generate dbt docs
-- host dbt docs on aws s3
+- deploy dbt docs on aws s3
 
 ### Pull requests CICD
 
 Here we want to give the developer feedback on:
-- sql conforms to coding standards
+- sql conforms to coding standards via linting
 - if models have regressed via DBT's automated testing.
 - build out an isolated dev environment. This can be used to show end users and perform UAT.
+- profile data between the pull request and production to highlight changes to data.
 
 #### Steps
 
-- linting sql fluff
+- checkout code
+- linting code via sql fluff
 - fetch manifest.json at start of each run from the prior run
 - use DBT's slim CI to review what models state has changed
 - dbt seed, run, test only models whos state was modified
 - save state (artefact at the end of each run)
-
-#### example of DBT's 'slim' CI
-
-```bash
-aws s3 cp s3://dbt-tutorial-sf/prod/manifest/manifest.json ./target/last_manifest/manifest.json
-
-dbt seed --select state:modified --state ./target/last_manifest --full-refresh
-dbt run --models state:modified --defer --state ./target/last_manifest
-dbt test --models state:modified --defer --state ./target/last_manifest
-```
-
+- run datafold to profile data changes
 
 ### sql linter sqlfluff
 
-In order to standardise sql styles accross developer you can use a linter like sqlfluff to set coding standards.
+when running diff-quality on github pull requests with master watch out for the checkout action that will checkout the the megre of your latest commit with the base branch. See [example of the issue here](https://stackoverflow.com/questions/58630097/github-actions-error-cannot-see-git-diff-to-master).
+
+
+In order to standardise sql styles across developer you can use a linter like sqlfluff to set coding standards.
 
 example usage:
 
