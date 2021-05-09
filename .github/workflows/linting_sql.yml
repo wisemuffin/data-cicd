@@ -67,6 +67,7 @@ jobs:
       # errors related to connection and profiles.yml issues since SQLFluff
       # returns very unclear errors when this occurs.
       run : |
+        export DBT_PROFILE_SCHEMA=pr_$(date +%s)
         dbt compile --profiles-dir ./ci_profiles
 
     - name: Lint dbt models
