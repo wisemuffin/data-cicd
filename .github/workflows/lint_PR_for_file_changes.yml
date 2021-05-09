@@ -2,18 +2,18 @@ name: Lint from a PR (only changed files)
 
 on: pull_request
 
-env:
-  DBT_PROFILE_TARGET:            test
-  DBT_PROFILE_SNOWFLAKE_ACCOUNT: ${{ secrets.DBT_PROFILE_SNOWFLAKE_ACCOUNT }}
-  DBT_PROFILE_USER:              ${{ secrets.DBT_PROFILE_TEST_USER }}
-  DBT_PROFILE_PASSWORD:          ${{ secrets.DBT_PROFILE_TEST_PASSWORD }}
-  DBT_PROFILE_ROLE:              DBT_FUNDAMENTALS_TEST_TRANSFORMER
-  DBT_PROFILE_DB:                DBT_FUNDAMENTALS_TEST
-  DBT_PROFILE_WH:                DBT_FUNDAMENTALS_TEST_WH
-
 jobs:
   lint_PR_for_file_changes:
     runs-on: ubuntu-latest
+    env:
+      DBT_PROFILE_TARGET:            test
+      DBT_PROFILE_SNOWFLAKE_ACCOUNT: ${{ secrets.DBT_PROFILE_SNOWFLAKE_ACCOUNT }}
+      DBT_PROFILE_USER:              ${{ secrets.DBT_PROFILE_TEST_USER }}
+      DBT_PROFILE_PASSWORD:          ${{ secrets.DBT_PROFILE_TEST_PASSWORD }}
+      DBT_PROFILE_ROLE:              DBT_FUNDAMENTALS_TEST_TRANSFORMER
+      DBT_PROFILE_DB:                DBT_FUNDAMENTALS_TEST
+      DBT_PROFILE_WH:                DBT_FUNDAMENTALS_TEST_WH
+      DBT_PROFILES_DIR:              /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/ci_profiles
 
     steps:
     - name: Checkout PR by removing the merge into main
@@ -21,17 +21,28 @@ jobs:
       with:
         fetch-depth: '0'
 
-    - name: Install Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
+    # - name: Install Python 3.7
+    #   uses: actions/setup-python@v1
+    #   with:
+    #     python-version: 3.7
 
-    - name: Install python packages
-      run: |
-        python -m pip install --upgrade pip
-        pip install dbt
-        pip install sqlfluff
-        dbt deps
+    # - name: Install python packages
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install dbt
+    #     pip install sqlfluff
+    #     dbt deps
+
+    - name: Setup conda environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: dbt-sqlfluff-env
+          python-version: ${{ matrix.python-version }}
+          auto-update-conda: true
+          auto-activate-base: false
+          environment-file: environment.yml
+          show-channel-urls: true
+          # use-only-tar-bz2: true
 
     - name: Get changed files
       id: get_file_changes
