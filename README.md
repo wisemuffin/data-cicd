@@ -68,6 +68,8 @@ Here we want to give the developer feedback on:
 
 ### sql linter sqlfluff
 
+!issue currently PR main contains the merge of main + feature, thus comparisons show no difference.
+
 In order to standardise sql styles across developer you can use a linter like sqlfluff to set coding standards.
 
 example usage:

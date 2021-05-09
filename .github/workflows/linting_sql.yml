@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout PR branch
+    - name: Checkout PR by removing the merge into main
       uses: actions/checkout@v2
       with:
-        fetch-depth: '0'
+        ref: ${{ github.head_ref }}
 
     - name: event info
       run: |
