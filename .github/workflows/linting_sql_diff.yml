@@ -63,7 +63,7 @@ jobs:
 
     - name: Lint SQL
       run: |
-        diff-quality --violations sqlfluff --compare-branch main
+        diff-quality --violations sqlfluff --compare-branch original_main
 
     - name: check pr
       run: |
