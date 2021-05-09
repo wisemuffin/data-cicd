@@ -68,6 +68,8 @@ Here we want to give the developer feedback on:
 
 ### sql linter sqlfluff
 
+!issue sql fluff doesnt support passing in dynamic profiles from CI build.
+
 when running diff-quality on github pull requests with master watch out for the checkout action that will checkout the the megre of your latest commit with the base branch. See [example of the issue here](https://stackoverflow.com/questions/58630097/github-actions-error-cannot-see-git-diff-to-master).
 
 
