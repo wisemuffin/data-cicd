@@ -6,7 +6,7 @@ env:
   DBT_PROFILE_TARGET:            test
 
 jobs:
-  lint:
+  lint PR for file changes:
     runs-on: ubuntu-latest
 
     steps:
