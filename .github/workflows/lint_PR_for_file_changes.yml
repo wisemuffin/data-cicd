@@ -1,6 +1,6 @@
 name: Lint from a PR (only changed files)
 
-on: pull_request
+on: push
 
 env:
   DBT_PROFILE_TARGET:            test
