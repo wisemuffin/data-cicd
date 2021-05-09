@@ -69,6 +69,15 @@ jobs:
     - name: check pr
       run: |
         cat ./models/marts/core/fct_orders.sql
+
+    - name: check pr status
+      run: |
+        git status
+        git add .
+    
+    - name: Lint SQL 2
+      run: |
+        diff-quality --violations sqlfluff --compare-branch original_main
     
     - name: check main
       run: |
