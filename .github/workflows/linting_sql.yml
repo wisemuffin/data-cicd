@@ -6,7 +6,7 @@ env:
   DBT_PROFILE_TARGET:            test
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,13 +19,10 @@ jobs:
       run: |
         jq . $GITHUB_EVENT_PATH
 
-    - name: Show that github merge request merge's PR_HEAD_SHA into main branch
-      run: |
-        git branch
-        git log -5
-
     - name: fetch main branch for sqlfluff to compare
-      run: git fetch origin main:main  
+      run: |
+        git fetch origin main:main  
+        git branch
 
     - name: Install Python 3.7
       uses: actions/setup-python@v1
