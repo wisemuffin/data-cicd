@@ -15,11 +15,10 @@ order_payments as (
 ),
 
 final as (
-    SELECT 
+    select
         orders.order_id,
         orders.customer_id,
         orders.order_date,
-        null as should_not_be_null,
         coalesce(order_payments.amount, 0) + 100 as amount
     from orders
     left join order_payments on orders.order_id = order_payments.order_id
