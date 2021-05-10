@@ -5,7 +5,7 @@ import networkx as nx
 import pickle
 
 # README
-# This file is a utility script that is run via CircleCI in the deploy
+# This file is a utility script that is run via CI in the deploy
 # step. It is not run via Airflow in any way. The point of this script is
 # to generate a pickle file that contains all of the dependencies between dbt models
 # for each dag (usually corresponding to a different schedule) that we want
