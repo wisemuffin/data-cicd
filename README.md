@@ -10,6 +10,8 @@ This repo shows how you can utilise CICD to speed up data development.
 
 Key to this is isolating every change (each feature/branch) against production data. Rebuilding your entire warehouse for each feature/branch would be supper expensive. However, if know your data lineage, you can build all the models you have changed and point them to production dependencies. This drastically reduces cost and time to test your changes.
 
+![Architecture - see below](Data-CICD.png)
+
 ## Goals of this project
 
 - Speed up deployment
