@@ -52,7 +52,6 @@ jobs:
     
     - name: Conda info
         run: conda info
-        
 
     - name: sqlfluff help
       # Full credit for this step to Teghan Nightengale!
