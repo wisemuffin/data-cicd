@@ -4,4 +4,4 @@ select
     type,
     status,
     origin
-from {{ source('jaffle_shop', 'case')}}
+from {{ source('jaffle_shop', 'case') }}

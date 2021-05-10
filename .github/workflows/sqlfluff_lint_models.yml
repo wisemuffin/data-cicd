@@ -37,19 +37,11 @@ jobs:
         environment-file: environment.yml
         show-channel-urls: true
         # use-only-tar-bz2: true
-    
-    - name: Conda info
-      shell: bash -l {0}
-      run: conda info
 
-    - name: sqlfluff help
-      # Full credit for this step to Teghan Nightengale!
+    - name: dbt install deps
       shell: bash -l {0}
       run: |
-        conda env list
-        conda activate dbt-sqlfluff-env
-        conda list
-        sqlfluff --help
+        dbt deps
 
     - name: Get changed files
       id: get_file_changes
