@@ -51,15 +51,15 @@ jobs:
         # use-only-tar-bz2: true
     
     - name: Conda info
-      shell: bash
+      shell: bash -l {0}
       run: conda info
 
     - name: sqlfluff help
       # Full credit for this step to Teghan Nightengale!
-      shell: bash
+      shell: bash -l {0}
       run: |
-        conda activate dbt-sqlfluff-env
         conda env list
+        conda activate dbt-sqlfluff-env
         conda list
         sqlfluff --help
 
@@ -116,7 +116,7 @@ jobs:
     #     dbt compile --models state:modified --state ./target/last_manifest --profiles-dir ./ci_profiles
 
     - name: Lint dbt models
-      shell: bash
+      shell: bash -l {0}
       if: steps.get_files_to_lint.outputs.lintees != ''
       run: |
         sqlfluff lint ${{ steps.get_files_to_lint.outputs.lintees }}
