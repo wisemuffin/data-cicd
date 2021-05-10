@@ -119,4 +119,5 @@ jobs:
       shell: bash -l {0}
       if: steps.get_files_to_lint.outputs.lintees != ''
       run: |
+        export DBT_PROFILE_SCHEMA=pr_$(date +%s)
         sqlfluff lint ${{ steps.get_files_to_lint.outputs.lintees }}
