@@ -33,4 +33,3 @@ jaffle_shop:
 
       threads: 8
       client_session_keep_alive: False
-      

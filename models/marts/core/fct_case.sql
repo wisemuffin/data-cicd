@@ -5,7 +5,7 @@ with int_case as (
         customer_id,
         status,
         origin,
-        {{ dbt_utils.pivot('type', dbt_utils.get_column_values(ref('stg_case'),
+        {{- dbt_utils.pivot('type', dbt_utils.get_column_values(ref('stg_case'),
                                                               'type'), suffix='_volume') }}
     from {{ ref('stg_case') }}
     group by
