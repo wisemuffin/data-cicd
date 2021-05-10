@@ -14,9 +14,9 @@ Key to this is isolating every change (each feature/branch) against production d
 
 ## Goals of this project
 
-- Speed up deployment
-- Speed up incident response - lineage
-- Prevent breaking changes - regression, data profiling
+- :rocket: Speed up deployment
+- :rocket: Speed up incident response - lineage
+- :boom: Prevent breaking changes - regression, data profiling
 - Optimize the infrastructure - reduce CICD build times
 - Find the right data asset for the problem - data catalogue
 - Reduce barriers to entry for changing data models. By providing guardrails such as testing, linting, and code review I can provide safety nets for devlopers/analysts to contribute code changes.
@@ -70,7 +70,7 @@ Here we want to give the developer feedback on:
 
 ### sql linter sqlfluff
 
-!issue sql fluff doesnt support passing in dynamic profiles from CI build.
+:warning: issue sql fluff doesnt support passing in dynamic profiles from CI build.
 
 when running diff-quality on github pull requests with master watch out for the checkout action that will checkout the the megre of your latest commit with the base branch. See [example of the issue here](https://stackoverflow.com/questions/58630097/github-actions-error-cannot-see-git-diff-to-master).
 
@@ -83,7 +83,7 @@ example usage:
 sqlfluff fix test.sql
 ```
 
-for PRs only new / modified code is reviewed. Test this by doing:
+:construction: for PRs only new / modified code is reviewed. Test this by doing:
 
 ```bash
 diff-quality --violations sqlfluff --compare-branch origin/main 
