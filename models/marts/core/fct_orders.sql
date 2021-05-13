@@ -20,7 +20,7 @@ final as (
         orders.customer_id,
         orders.order_date as date_orderd,
         null as must_not_be_null,
-        coalesce(order_payments.amount, 0) + 100 as amount
+        coalesce(order_payments.amount, 0) as amount
     from orders
     left join order_payments on orders.order_id = order_payments.order_id
 )
