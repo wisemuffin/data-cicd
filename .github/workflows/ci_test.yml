@@ -34,9 +34,10 @@ jobs:
         pip install datafold-sdk==0.0.2
         dbt deps
 
-    - name: Lint SQL
-      run: |
-        diff-quality --violations sqlfluff --compare-branch origin/main
+    ## have moved linting to sqlfluff action
+    # - name: Lint SQL
+    #   run: |
+    #     diff-quality --violations sqlfluff --compare-branch origin/main
     
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
